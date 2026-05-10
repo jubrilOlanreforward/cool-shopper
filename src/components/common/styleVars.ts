@@ -1,0 +1,22 @@
+// Centralized style variables for Tailwind + custom tokens
+export const styleVars = {
+  primary: 'text-primary',
+  primaryBg: 'bg-primary',
+  secondary: 'text-secondary',
+  secondaryBg: 'bg-secondary',
+  surface: 'bg-surface',
+  surfaceContainer: 'bg-surface-container',
+  outline: 'border-outline',
+  outlineVariant: 'border-outline-variant',
+  rounded: 'rounded-xl',
+  shadow: 'shadow-sm',
+  shadowHover: 'hover:shadow-md',
+  fontH1: 'font-h1 text-h1',
+  fontH2: 'font-h2 text-h2',
+  fontH3: 'font-h3 text-h3',
+  fontLabel: 'font-label-sm text-label-sm',
+  fontBody: 'font-body-md',
+  transition: 'transition-all',
+  active: 'active:scale-95',
+  disabled: 'opacity-50 pointer-events-none',
+};
