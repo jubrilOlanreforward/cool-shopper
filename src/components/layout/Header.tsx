@@ -18,7 +18,7 @@ export default function Header({ onMenuToggle, activeNav = 'Shop' }: HeaderProps
       <div className="flex items-center gap-md">
         <button
           onClick={onMenuToggle}
-          className="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 transition-colors p-2 rounded-full"
+          className="md:hidden material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 transition-colors p-2 rounded-full"
         >
           menu
         </button>

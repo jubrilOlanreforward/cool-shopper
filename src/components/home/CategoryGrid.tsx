@@ -1,11 +1,16 @@
 'use client';
 
+import Link from 'next/link';
+
 export default function CategoryGrid() {
   return (
     <section className="mb-xl">
       <div className="grid grid-cols-12 grid-rows-2 gap-md h-[600px]">
         {/* Smart Phones (Featured) */}
-        <div className="col-span-8 row-span-2 relative group overflow-hidden rounded-xl bg-[#FAF9F6] soft-elevation cursor-pointer">
+        <Link
+          href="/products?category=smartphones"
+          className="col-span-8 row-span-2 relative group overflow-hidden rounded-xl bg-[#FAF9F6] soft-elevation cursor-pointer"
+        >
           <img
             alt="Smart Phones"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -20,10 +25,13 @@ export default function CategoryGrid() {
               Explore Collection
             </button>
           </div>
-        </div>
+        </Link>
 
         {/* Laptops */}
-        <div className="col-span-4 row-span-1 relative group overflow-hidden rounded-xl bg-[#FAF9F6] soft-elevation cursor-pointer">
+        <Link
+          href="/products?category=laptops"
+          className="col-span-4 row-span-1 relative group overflow-hidden rounded-xl bg-[#FAF9F6] soft-elevation cursor-pointer"
+        >
           <img
             alt="Laptops"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -32,10 +40,13 @@ export default function CategoryGrid() {
           <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
             <h3 className="text-white font-h3 text-h3">Laptops</h3>
           </div>
-        </div>
+        </Link>
 
         {/* Skincare */}
-        <div className="col-span-4 row-span-1 relative group overflow-hidden rounded-xl bg-[#FAF9F6] soft-elevation cursor-pointer">
+        <Link
+          href="/products?category=skincare"
+          className="col-span-4 row-span-1 relative group overflow-hidden rounded-xl bg-[#FAF9F6] soft-elevation cursor-pointer"
+        >
           <img
             alt="Skincare"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -44,7 +55,7 @@ export default function CategoryGrid() {
           <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
             <h3 className="text-white font-h3 text-h3">Skincare</h3>
           </div>
-        </div>
+        </Link>
       </div>
     </section>
   );
