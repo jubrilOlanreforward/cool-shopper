@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { ProductsResponse, Product, Category } from '@/types/product';
 
 const api = axios.create({
-  baseURL: 'https://dummyjson.com',
+  baseURL: process.env.API_BASE_URL || 'https://dummyjson.com',
   timeout: 10000,
 });
 
