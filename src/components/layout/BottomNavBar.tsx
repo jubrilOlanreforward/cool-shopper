@@ -14,7 +14,7 @@ export default function BottomNavBar({ activeTab = 'Shop' }: BottomNavBarProps) 
 
   const tabs = [
     { label: 'Shop', icon: 'storefront', href: '/' },
-    { label: 'Categories', icon: 'category', href: '/categories' },
+    { label: 'Categories', icon: 'category', href: '/products' },
     { label: 'Cart', icon: 'shopping_cart', href: '/cart' },
     { label: 'Profile', icon: 'person', href: '#' },
   ];

@@ -36,7 +36,7 @@ export default function Header({ onMenuToggle, activeNav = 'Shop' }: HeaderProps
         </Link>
         <Link
           className={activeNav === 'Categories' ? 'text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-variant/50 transition-colors px-sm py-xs rounded'}
-          href="/categories"
+          href="/products"
         >
           Categories
         </Link>
@@ -45,12 +45,6 @@ export default function Header({ onMenuToggle, activeNav = 'Shop' }: HeaderProps
           href="/cart"
         >
           Cart
-        </Link>
-        <Link
-          className={activeNav === 'Profile' ? 'text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-variant/50 transition-colors px-sm py-xs rounded'}
-          href="#"
-        >
-          Profile
         </Link>
       </nav>
 
