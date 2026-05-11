@@ -1,5 +1,6 @@
+'use client';
+
 import React from 'react';
-import { styleVars } from '../common/styleVars';
 
 interface CartItemProps {
   id: string;
@@ -13,7 +14,6 @@ interface CartItemProps {
 }
 
 export default function CartItem({
-  id,
   image,
   title,
   description,
@@ -23,44 +23,43 @@ export default function CartItem({
   onRemove,
 }: CartItemProps) {
   return (
-    <div className={`${styleVars.surfaceContainer} ${styleVars.rounded} p-md flex flex-col sm:flex-row gap-md ${styleVars.shadow} border border-outline-variant/20 relative overflow-hidden group`}>
-      <div className="w-full sm:w-32 h-48 sm:h-32 rounded-lg bg-surface-container overflow-hidden shrink-0">
-        <img alt={title} src={image} className="w-full h-full object-cover" />
+    <div className="bg-surface-container-lowest rounded-xl p-md flex flex-col sm:flex-row gap-md shadow-sm border border-outline-variant/20">
+      <div className="w-full sm:w-32 h-32 rounded-lg overflow-hidden bg-surface-container">
+        <img alt={title} className="w-full h-full object-cover" src={image} />
       </div>
-
-      <div className="flex flex-col justify-between flex-grow">
-        <div className="pr-8 sm:pr-0">
-          <h3 className={`${styleVars.fontH3} text-body-lg font-bold text-on-surface`}>{title}</h3>
-          <p className="font-body-md text-label-sm text-on-surface-variant">{description}</p>
+      <div className="flex-grow flex flex-col justify-between">
+        <div className="flex justify-between items-start">
+          <div>
+            <h3 className="font-h3 text-h3 text-on-surface">{title}</h3>
+            <p className="text-on-surface-variant">{description}</p>
+          </div>
+          <span className="font-bold text-body-lg text-primary">{price}</span>
         </div>
-
-        <div className="flex justify-between items-center sm:items-end mt-md sm:mt-0">
-          <p className={`${styleVars.fontH3} text-body-lg font-bold text-primary`}>{price}</p>
-
-          <div className="flex items-center bg-surface-container-high rounded-full px-xs py-xs">
+        <div className="flex justify-between items-end mt-md">
+          <div className="flex items-center gap-sm bg-surface-container-low px-sm py-xs rounded-full border border-outline-variant/30">
             <button
+              className="material-symbols-outlined text-on-surface-variant active:scale-95 transition-transform"
               onClick={() => onQuantityChange?.(Math.max(1, quantity - 1))}
-              className="w-8 h-8 flex items-center justify-center text-primary ${styleVars.active} ${styleVars.transition}"
             >
-              <span className="material-symbols-outlined text-[18px]">remove</span>
+              remove
             </button>
-            <span className="px-sm font-bold text-on-surface">{quantity}</span>
+            <span className="font-semibold px-md">{quantity}</span>
             <button
+              className="material-symbols-outlined text-on-surface-variant active:scale-95 transition-transform"
               onClick={() => onQuantityChange?.(quantity + 1)}
-              className="w-8 h-8 flex items-center justify-center text-primary ${styleVars.active} ${styleVars.transition}"
             >
-              <span className="material-symbols-outlined text-[18px]">add</span>
+              add
             </button>
           </div>
+          <button
+            className="text-error font-label-sm flex items-center gap-xs hover:underline"
+            onClick={onRemove}
+          >
+            <span className="material-symbols-outlined text-[18px]">delete</span>
+            Remove
+          </button>
         </div>
       </div>
-
-      <button
-        onClick={onRemove}
-        className="absolute top-md right-md text-outline hover:text-error ${styleVars.transition} ${styleVars.active}"
-      >
-        <span className="material-symbols-outlined">delete</span>
-      </button>
     </div>
   );
 }

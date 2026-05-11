@@ -1,58 +1,79 @@
-import React from 'react';
-import { styleVars } from '../common/styleVars';
-import SectionTitle from '../common/SectionTitle';
-import ProductCard from './ProductCard';
+'use client';
 
-const newArrivals = [
-  {
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCf2ud7jNBM-eGbyiwcMq10e7rIOxrM4-igEOh3fuQepfQQa8828dw8RPaa4bvHGmypBRKTpqX_RhiH2oXD01_X7N1d-oePyGm1WKuMj3cagUie4Z3np_ricI1XRxDhIIq8XTkY5GTa5EAMKHXqsTHR96wHvcsCPuuqlD7bx92lXR_TW-cJN9m1WObdg4eMhgTzPTz3IllarE4RSOnhaiAMaB2XHcHrhc3xRFA6pRYVr6w1hfcBi9M25jHlHpUchPQs9H1oEL9cSqcp',
-    category: 'Electronics',
-    title: 'Serenity Tablet Pro',
-    price: '$899.00',
-    rating: 4.8,
-  },
-  {
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDlsJR808xwTJEWQrByAbkXWF1NePnp6UHHwqZB9Lhp1DmcV2bkCebnhDVtT07Bx83W4_fLkuJzTs9EfXaxyKXHayIexxuuygV0oZaPMIXaoQWMvcdevdvl_4SAsFJgvg7_vch9s60Ahm-yJkle-9wW1vwReD6pLd7o_UGoi3oEb7X9ldzwSxXetgx1aPpnpkZqH5bsVYERl0SEtNBpt6y_mA3k0uvvP2-VDdfgclJE-08ec7prtY5nBmK1dqGKB370losJRWiYz_j3',
-    category: 'Wellness',
-    title: 'Dewy Glow Serum',
-    price: '$54.00',
-    rating: 4.7,
-  },
-  {
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAc1qfSt_FFZoduh9S2pZ-GZfC2eD0XIBiuYmk3pjwuTw2enFYM6Us5iQfGc2RZ1ew3W-tKgyvEqB5AQPStpTY_rGHedHxxEUmF3PPyWjh5JzA1jDaKhyA_Nu8sIQ6o8uXvI1oa0TvFAuygDcpwr2FTVAbmcxxQsJfYBb3cqn1cO-xA_ZLXeOBGM73qeygoGFVWwo6K3mDrw5AbuCNfiUCsdC0icrnQPGQPvWfgGSv1sNx16yPEWYPG3wL_Qi2MhSn-GEYdmo7GfUM2',
-    category: 'Laptops',
-    title: 'AirBook Zen 14"',
-    price: '$1,299.00',
-    rating: 4.9,
-  },
-  {
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBzdRzU7epdcCUk2L-2HicTUlBnW2f2pZaqRom-RqDUy8pF7fk__F7v5MQYGOA1bCJ3Ia73tMtZAwEXOsV1lolFyWt3xRFA6pRYVr6w1hfcBi9M25jHlHpUchPQs9H1oEL9cSqcp',
-    category: 'Accessories',
-    title: 'Horizon Blue Frames',
-    price: '$120.00',
-    rating: 4.6,
-  },
-];
+import React, { useEffect } from 'react';
+import Link from 'next/link';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { fetchProducts } from '@/store/productsSlice';
+import { addToCart } from '@/store/cartSlice';
+import Skeleton from '@/components/common/Skeleton';
+import type { Product } from '@/types/product';
 
 export default function NewArrivalsSection() {
+  const dispatch = useAppDispatch();
+  const { items, loading } = useAppSelector((s) => s.products);
+
+  useEffect(() => {
+    dispatch(fetchProducts({ limit: 4, skip: 0 }));
+  }, [dispatch]);
+
+  const arrivals = items.slice(0, 4);
+
   return (
     <section className="mb-xl">
       <div className="flex justify-between items-end mb-md">
         <div>
-          <SectionTitle
-            title="New Arrivals"
-            subtitle="The latest additions to our serene collection."
-          />
+          <h2 className="font-h2 text-h2 text-on-background">New Arrivals</h2>
+          <p className="text-on-surface-variant font-body-md mt-xs">The latest additions to our serene collection.</p>
         </div>
-        <a className="text-primary font-bold font-label-sm border-b-2 border-primary pb-1 hover:text-primary-container hover:border-primary-container ${styleVars.transition}">
+        <Link
+          className="text-primary font-bold font-label-sm border-b-2 border-primary pb-1 hover:text-primary-container hover:border-primary-container transition-all"
+          href="/products"
+        >
           View All
-        </a>
+        </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-md">
-        {newArrivals.map((product) => (
-          <ProductCard key={product.title} {...product} />
-        ))}
-      </div>
+
+      {loading ? (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-md">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+              <Skeleton className="aspect-square w-full rounded-none" />
+              <div className="p-md space-y-2">
+                <Skeleton className="h-3 w-16" />
+                <Skeleton className="h-5 w-3/4" />
+                <Skeleton className="h-4 w-1/3" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-md">
+          {arrivals.map((product: Product) => (
+            <Link
+              key={product.id}
+              href={`/products/${product.id}`}
+              className="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm group hover:shadow-md transition-shadow"
+            >
+              <div className="aspect-square overflow-hidden">
+                <img
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  alt={product.title}
+                  src={product.thumbnail}
+                />
+              </div>
+              <div className="p-md">
+                <p className="text-primary font-label-sm text-label-sm uppercase tracking-wider mb-xs">
+                  {product.category}
+                </p>
+                <h3 className="font-h3 text-body-md font-bold text-on-surface line-clamp-1">
+                  {product.title}
+                </h3>
+                <p className="text-primary font-bold mt-xs">${product.price.toFixed(2)}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

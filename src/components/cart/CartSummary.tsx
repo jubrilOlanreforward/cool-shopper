@@ -1,6 +1,6 @@
+'use client';
+
 import React from 'react';
-import { styleVars } from '../common/styleVars';
-import Button from '../common/Button';
 
 interface CartSummaryProps {
   subtotal: string;
@@ -18,34 +18,55 @@ export default function CartSummary({
   onCheckout,
 }: CartSummaryProps) {
   return (
-    <div className={`${styleVars.surfaceContainer} ${styleVars.rounded} p-md ${styleVars.shadow} space-y-sm`}>
-      <h2 className={`${styleVars.fontH3} text-on-surface mb-md`}>Order Summary</h2>
+    <div className="bg-surface-container rounded-xl p-md shadow-sm">
+      <h3 className="font-h3 text-h3 text-on-surface mb-md">Order Summary</h3>
 
-      <div className="flex justify-between font-body-md text-on-surface-variant">
-        <span>Subtotal</span>
-        <span className="font-semibold text-on-surface">{subtotal}</span>
+      <div className="space-y-sm mb-lg">
+        <div className="flex justify-between text-on-surface-variant">
+          <span>Subtotal</span>
+          <span>{subtotal}</span>
+        </div>
+        <div className="flex justify-between text-on-surface-variant">
+          <span>Shipping</span>
+          <span>{shipping}</span>
+        </div>
+        <div className="flex justify-between text-on-surface-variant">
+          <span>Tax</span>
+          <span>{tax}</span>
+        </div>
+        <div className="border-t border-outline-variant/30 my-sm"></div>
+        <div className="flex justify-between text-on-surface font-bold text-body-lg">
+          <span>Total</span>
+          <span className="text-primary">{total}</span>
+        </div>
       </div>
 
-      <div className="flex justify-between font-body-md text-on-surface-variant">
-        <span>Shipping</span>
-        <span className="font-semibold text-on-surface">{shipping}</span>
+      {/* Promo Code */}
+      <div className="mb-lg">
+        <label className="block font-label-sm text-on-surface-variant mb-xs" htmlFor="promo">
+          Promo Code
+        </label>
+        <div className="flex gap-sm">
+          <input
+            className="flex-grow bg-surface-container-lowest border border-outline-variant/50 rounded-lg px-sm py-xs focus:ring-2 focus:ring-primary-container focus:outline-none text-body-md"
+            id="promo"
+            placeholder="Enter code"
+            type="text"
+          />
+          <button className="bg-secondary text-on-secondary px-md py-xs rounded-lg font-bold text-label-sm active:scale-95 transition-transform">
+            Apply
+          </button>
+        </div>
       </div>
 
-      <div className="flex justify-between font-body-md text-on-surface-variant">
-        <span>Tax</span>
-        <span className="font-semibold text-on-surface">{tax}</span>
-      </div>
-
-      <div className="pt-sm mt-sm border-t border-outline-variant/30 flex justify-between items-center">
-        <span className={`${styleVars.fontH3} font-bold text-on-surface`}>Total</span>
-        <span className={`${styleVars.fontH2} font-bold text-primary`}>{total}</span>
-      </div>
-
-      <Button variant="primary" className="w-full py-md mt-md" onClick={onCheckout}>
+      <button
+        onClick={onCheckout}
+        className="w-full bg-primary text-on-primary py-md rounded-lg font-bold text-body-lg shadow-lg active:scale-95 transition-all hover:opacity-90"
+      >
         Proceed to Checkout
-      </Button>
+      </button>
 
-      <div className="flex items-center justify-center gap-sm text-on-surface-variant font-label-sm mt-md">
+      <div className="mt-md flex items-center justify-center gap-sm text-on-surface-variant font-label-sm">
         <span className="material-symbols-outlined text-[16px]">lock</span>
         Secure Payment Powered by Serene
       </div>

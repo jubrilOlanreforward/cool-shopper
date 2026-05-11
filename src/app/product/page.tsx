@@ -5,21 +5,9 @@ import MainLayout from '@/components/layout/MainLayout';
 import ProductDetails from '@/components/product/ProductDetails';
 
 export default function ProductDetailsPage() {
-  const [product] = React.useState({
-    id: '1',
-    title: 'Minimalist Chrono Series 01',
-    category: 'Premium Collection',
-    price: '$189.00',
-    rating: 4.8,
-    reviewCount: 124,
-    description:
-      'Crafted for the modern essentialist, the Series 01 features a surgical-grade stainless steel casing and a sapphire crystal glass. Its quiet elegance is matched by a high-precision Japanese quartz movement, ensuring reliability without the noise.',
-    inStock: true,
-  });
-
   return (
-    <MainLayout>
-      <ProductDetails productData={product} />
+    <MainLayout activeNav="Shop" showCartBadge={true}>
+      <ProductDetails />
     </MainLayout>
   );
 }

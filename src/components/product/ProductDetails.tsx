@@ -1,92 +1,83 @@
+'use client';
+
 import React from 'react';
-import { styleVars } from '../common/styleVars';
 import ProductGallery from './ProductGallery';
 import ProductInfo from './ProductInfo';
 import ProductOptions from './ProductOptions';
 import ProductActions from './ProductActions';
-import ProductTabs from './ProductTabs';
 import RelatedProducts from './RelatedProducts';
 
-interface ProductDetailsProps {
-  productData: any;
-}
+export default function ProductDetails() {
+  const galleryImages = [
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuDZZEiwc8ufeZK-KAT0dADwv1uqTOhZZZ41vhIm7tvOLRJTGW-x04E7fGRE9ayhfxoK3cpZzVFyUaRQwi3U4unHf-IfEEEFIcYzcdd4sSA8lAWsvPjMIVBCcHjxAsXtKAYhRl5G0h0pzxunsAODgHXsJA0BgAvrtds2LmCcoG5w2RoxKJbbVTQyF3KU91gCoDFfiCaPzLIUPlSbg0HcnunXpD_q0rxuWswdMSxcvWROtg3R4f9kD8fRE5fPqqpdmCUcAt1JzBYnTOdz',
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuDDHxt4FUYfW8q7KybLTd5aj4GEEu2XO9o01cu5Yps9OXOuJSYmXV4T0qDMNMkmMObJjRxxzZC4eaVXTa3wR8yUIQtfc55eJp7qZXHT3_euPtXeSj__9Bv0ae7XH-_NcfYHRVgXNss1Xm6qzzZzX3z--l5oVh3P0Ioj5XJVNNzwFARHm3FmxUS3TThEv-MYU0t00ZovduC5G2cQtfco6GIt1c5jO_3sQoIjQnQgSFmpD0UG9lQ0Tbk9zEFvgmDPD-N5ApfeyOo1iBl2',
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuAGRqKKcNdb5LPPF5qSnBZpxZSN_Y-XB1XKBQaYmQXCT1PjeTTIGOYJnQn0cQGL60zG8VPFT6Y8NETfMTNVdH95pQiOmu7OpBmxIJevEkPMkVSUsxP6VxLQ7vsmDJpWU3JQOrMmO-KU1s_IIHOJjIc_jeghqSSqpJCTmoFAYkPfsK_FBaDnN6fd789Tj0rccVjP19jMHgyuCiLoz_2hArvZcItuOmmjjU388tj1gsZ0oVd3B4H48SG7X2kvmlkEdvbC8ZfIAmNcgpSX',
+  ];
 
-export default function ProductDetails({ productData }: ProductDetailsProps) {
-  const tabs = [
-    {
-      label: 'Specifications',
-      content:
-        'Case Diameter: 40mm | Water Resistance: 5 ATM | Warranty: 2 Years Limited',
-    },
-    {
-      label: 'Shipping & Returns',
-      content:
-        'Free worldwide shipping on orders over $150. Returns accepted within 30 days of delivery.',
-    },
+  const colors = [
+    { name: 'Turquoise Matte', bgClass: 'bg-primary', selected: true },
+    { name: 'Cream', bgClass: 'bg-secondary-fixed', selected: false },
+    { name: 'Charcoal', bgClass: 'bg-inverse-surface', selected: false },
+  ];
+
+  const sizes = [
+    { label: 'Small', selected: true },
+    { label: 'Large', selected: false },
   ];
 
   const relatedProducts = [
     {
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCvu97Mz14WNSQ2ctePVkxSNczOKKkqrjq545tWWqlP6e_TW98LKXgDnj6Sj2mNXtB-uwByivstvPlz-rhNHSkIph1Oav_ErpWjZsh2uOSG9CxE1x6glwn2QeGp0R1VcpKHliA_zI5cvvb2kVlrmngd66W5e1kBeQo9SRiAbAGsTMgacnMSQsGuhFyL-_mbPhthSKi_ka0uyYP4V4u5eHhsb_QbXbF4doevAWFrPPW9LiJzyakh6M2FGffQSewAJ4QZbBB6HK6S_q9s',
-      category: 'Apparel',
-      title: 'Essential Tee',
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDzECa3UBKCTyrxs2tTUh7bRgsdBBQcRSFjYtZnKgjHb8Ln48apumf2IPuBY-amPnCKqHvgh9bJVCL10VMz-VJk3WRbscwdbLJ4d9WDkfDPzLu3-MJwCu3K_4JX3nQ_B28eJcwj6Lvghgy6zFQDGkB1BTqfQ2EUP3QkdItxcWE80K6NpGMA5J3kxDZavjcIUWP99CytyuLarVq0axYxLPJeIZfzvyiV1E39CypExbSI8v2HTyslZW0p3BipVOFL169ev81-fYxDxUfv',
+      title: 'Organic Fiber Tray',
       price: '$45.00',
-      rating: 4.8,
     },
     {
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBGjANlbcGBwGA2OYL5y0SVZfdFd2WfavVmXoRpprmdFWpw1rFr4lkJs_JOkvghrqKE_tJjXOQaoPV20LlAHIQuCqAl9fCYKsN9EP0qJv1MJa2iekjTjcWEhdAF3vrxwuJKD4Zjb81GOc_PkYpPs0DzTRAACPmqnWd620o9mpJ3pCQFYa-Y3VsQ3tIf7zptdrYcXnJ4YVFzK1KjuyiueXzcQNbdgPbMRsaDyLc_CZGwfHTacE_s_fd1Ui4soddYPh2q3JVocxshQL_0',
-      category: 'Accessories',
-      title: 'Minimal Wallet',
-      price: '$68.00',
-      rating: 4.9,
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAE21jNUfOlywyRwv4e6CJoVDKUaLfwJaEQa2JCkqSjvTM3RaV2jIWnyd52U1NF-pzhnCHvNgLOwW6s3XQxvezRmh492_vYib08Q3p3THj-UUSN2kvduyGdfsAsGbBVPz9jY_lF1pLZxyhHD-EnVLczic_iB_cellK_Wq7I-LgmVfYyPlALOfxGbT2kSbkXfunOHhFSnSKevpiJLTKb-aXrVxCGujCHBGO1c3gndVLW6lEFndNxBIE11dGB9z3NmzS57nFSCJnmsnfB',
+      title: 'Marble Taper Holder',
+      price: '$32.00',
     },
     {
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAete49O0cWY6T9NYnG1RnCJ5-eO2y_eQGq9TT6LBJeGk9U7uMlu_0LkXIDWleYda9ULXa6Qr6PhtC1KMvncB7m-JvmRTbvlsFNXXlb1e_0gR4i2dNFvElfIcj3ZmyZx_hbtRI7qaEDzcOGrG1LaZywrHGQU572g_pAn-WQr_q8fVYbYC-enFnaYdg6DEd4IasFWmq7oLXsq_BURw6UfgdAEb3es8qazhMtftMn9gR-iDuRrAbiRjl1THRp1kYhx7N90tUD5P_86Dkn',
-      category: 'Footwear',
-      title: 'Daily Sneaker 01',
-      price: '$120.00',
-      rating: 4.7,
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBNOiIeuSTJtIM1d43edRgpfnoQavcHFFdvaG-7cWrlIwL8pVWiHL01F4E19ufObv3jpDYjn2TIt8lPmUbQoyRrkGiYuhRoUopTzfrHZjUL7qYW9cYNGE0hzfB5UzxaQUE1kltIcLhG5sU8RWXS-0BLTPpFquVyAALnDy_-ld_5Gk5n_L8Xw3E69hU0taoTX8Vj-I3t2OZ-gdsjrfkiuDv5jxWS6NKoUN6GHIzS2VJV_P96D2b6cO0NYImbpKaKjKO4wMtR290P6-Iz',
+      title: 'Pure Linen Runner',
+      price: '$58.00',
+    },
+    {
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBDBr5NUxB4d1rpFJuxk6leJ5_Teu_Eh3rzh-pY6oXeOPvJsxxOypfEEow35MuoufZN-o0ItB1tlaWHpoya2rMxXaLysGCyuM4O3y0Eq_Ac96WXG8Rg-nU009hLXBYDoVWTU1uc8Hmc-OSmQlonKyqftAzB4jB4cqgsp3_SuMNS4WSA_QBA-8PrI0g8NsJ5HsG_Xzy2wUUvbe3cD6YI1m0nD4uZx7OpuzIVCwnzGEJ4OPPwRtyuWph58N7z0nURdvriJgFOd02a-TUD',
+      title: 'Artisan Pampas Stems',
+      price: '$28.00',
     },
   ];
 
   return (
-    <div className="flex flex-col md:grid md:grid-cols-12 md:gap-lg">
-      <ProductGallery
-        images={[
-          'https://lh3.googleusercontent.com/aida-public/AB6AXuCiBN137eciHnXFiHN7BpYR-nDnMcffLKRQa8Cz0pNorSW_pATp7U8qvFOMPKhc6L-Ow-Cb67HVy0wSyZ0TZdq7xe8aBnw2vgKliSt86bfkjUaLPrxnpB2N6wFDh3bV8mrYkZbmHGnSYtVW4BA5HI52V8bVnfHBeChavzue9hXspIcT_pvdPFR2WMUbMFTXAXYhvJVHHacD5Sx2TieQ9hy6i5zQOaxADVJmVImMrB5-Pc_u9ufo3uBJvHW0A66BUaSYusZHy6zKJSv1',
-          'https://lh3.googleusercontent.com/aida-public/AB6AXuAH8DJNVDP5NGvUmOhzSQKzSPcxEsvfHWjDJtSEjHMeTZbdo972CZPlj_J0JXAEOt2FOLOry9VsFNXdF7fmIYFWcXTIAebg3guf2odj772XkEZ7Z2QtxKvBVYjg8Uz0N3xLEUaZFLZ4apVkgp2XUNMchmRDTAZkRLR9yTW1bWPvgWZHTiXh9T81owRawPEq_UHHryyuEDjZ1SShm17K8Z54cIDNTAgzFUOXX64tBgTaLYuYJhp7Coqd7bFfBVlxXpG1fZpAzQHjLZoZ',
-          'https://lh3.googleusercontent.com/aida-public/AB6AXuDJkiYOz5xcpd5kaETEl_I3Lg7WD5XtqrnjoUI4B5vjpEhnRaBdYl9Q_l6P269cN4g48ctxDGGy4YFd1KE-xHcdptqhC9SXqOWm5FMg9ZWahppUy_7F-QHycgv7uSSgcyMDOj2T82q8us5I1O-DEQgwRXFU42zdTkxBL16awWtgVUY9QvPZantYOnvwg2LncYGjgqbMsoO5vAcR1Vm8SQXKfqvxG-W3FnOO3683QKVAeH7Jtuv_wMaCIA88VUgmr3gUWIb1feeHftEB',
-        ]}
-        alt="Minimalist Chrono Series 01"
-      />
+    <>
+      {/* Product Details Section */}
+      <section className="grid grid-cols-1 md:grid-cols-12 gap-xl items-start">
+        {/* Left: Product Image */}
+        <ProductGallery images={galleryImages} alt="Minimalist Ceramic Vase" />
 
-      <div className="md:col-span-5 lg:col-span-4 flex flex-col gap-md">
-        <ProductInfo
-          category="Premium Collection"
-          title="Minimalist Chrono Series 01"
-          price="$189.00"
-          rating={4.8}
-          reviewCount={124}
-          description="Crafted for the modern essentialist, the Series 01 features a surgical-grade stainless steel casing and a sapphire crystal glass. Its quiet elegance is matched by a high-precision Japanese quartz movement, ensuring reliability without the noise."
-        />
+        {/* Right: Product Info */}
+        <div className="md:col-span-5 flex flex-col gap-md">
+          <ProductInfo
+            category="Handcrafted Essentials"
+            title="Azure Serenity Vase"
+            price="$89.00"
+            rating={4}
+            reviewCount={24}
+            description="Elevate your living space with the Azure Serenity Vase. Each piece is hand-thrown by master artisans using premium clay, finished with a signature matte turquoise glaze that mimics the tranquil depths of the ocean."
+          />
 
-        <ProductOptions
-          options={[
-            {
-              name: 'Strap',
-              values: ['Brushed Steel', 'Cognac Leather'],
-            },
-          ]}
-        />
+          <ProductOptions
+            colors={colors}
+            sizes={sizes}
+            selectedColorName="Turquoise Matte"
+          />
 
-        <ProductActions inStock />
+          <ProductActions />
+        </div>
+      </section>
 
-        <ProductTabs tabs={tabs} />
-      </div>
-
-      <div className="md:col-span-12 mt-xl">
-        <RelatedProducts products={relatedProducts} />
-      </div>
-    </div>
+      {/* Complete the Look / Related Products */}
+      <RelatedProducts products={relatedProducts} />
+    </>
   );
 }

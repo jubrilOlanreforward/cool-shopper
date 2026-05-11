@@ -17,6 +17,8 @@
   --color-on-secondary-container: #636451;
   --color-secondary-fixed: #e4e4cc;
   --color-secondary-fixed-dim: #c8c8b0;
+  --color-on-secondary-fixed: #1b1d0e;
+  --color-on-secondary-fixed-variant: #474836;
   
   --color-tertiary: #815600;
   --color-on-tertiary: #ffffff;
@@ -24,6 +26,8 @@
   --color-on-tertiary-container: #744d00;
   --color-tertiary-fixed: #ffddb1;
   --color-tertiary-fixed-dim: #fbbb56;
+  --color-on-tertiary-fixed: #291800;
+  --color-on-tertiary-fixed-variant: #624000;
   
   --color-error: #ba1a1a;
   --color-on-error: #ffffff;
@@ -42,6 +46,7 @@
   --color-surface-container-highest: #dde4e2;
   --color-surface-bright: #f4fbf8;
   --color-surface-dim: #d4dcd9;
+  --color-surface-variant: #dde4e2;
   --color-inverse-surface: #2b3230;
   --color-inverse-on-surface: #ebf2f0;
   --color-inverse-primary: #3adccc;
@@ -72,14 +77,24 @@
   --color-on-primary: var(--color-on-primary);
   --color-primary-container: var(--color-primary-container);
   --color-on-primary-container: var(--color-on-primary-container);
+  --color-primary-fixed: var(--color-primary-fixed);
+  --color-primary-fixed-dim: var(--color-primary-fixed-dim);
   --color-secondary: var(--color-secondary);
   --color-on-secondary: var(--color-on-secondary);
   --color-secondary-container: var(--color-secondary-container);
   --color-on-secondary-container: var(--color-on-secondary-container);
+  --color-secondary-fixed: var(--color-secondary-fixed);
+  --color-secondary-fixed-dim: var(--color-secondary-fixed-dim);
+  --color-on-secondary-fixed: var(--color-on-secondary-fixed);
+  --color-on-secondary-fixed-variant: var(--color-on-secondary-fixed-variant);
   --color-tertiary: var(--color-tertiary);
   --color-on-tertiary: var(--color-on-tertiary);
   --color-tertiary-container: var(--color-tertiary-container);
   --color-on-tertiary-container: var(--color-on-tertiary-container);
+  --color-tertiary-fixed: var(--color-tertiary-fixed);
+  --color-tertiary-fixed-dim: var(--color-tertiary-fixed-dim);
+  --color-on-tertiary-fixed: var(--color-on-tertiary-fixed);
+  --color-on-tertiary-fixed-variant: var(--color-on-tertiary-fixed-variant);
   --color-error: var(--color-error);
   --color-on-error: var(--color-on-error);
   --color-error-container: var(--color-error-container);
@@ -96,6 +111,7 @@
   --color-surface-container-highest: var(--color-surface-container-highest);
   --color-surface-bright: var(--color-surface-bright);
   --color-surface-dim: var(--color-surface-dim);
+  --color-surface-variant: var(--color-surface-variant);
   --color-inverse-surface: var(--color-inverse-surface);
   --color-inverse-on-surface: var(--color-inverse-on-surface);
   --color-inverse-primary: var(--color-inverse-primary);
@@ -122,8 +138,8 @@
 
 @layer base {
   body {
-    background: rgb(244 251 248);
-    color: rgb(22 29 28);
+    background-color: #F5F5DC;
+    color: #161d1c;
     font-family: "Inter", sans-serif;
   }
   

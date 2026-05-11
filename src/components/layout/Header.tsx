@@ -1,39 +1,71 @@
-import React from 'react';
-import { styleVars } from '../common/styleVars';
-import IconButton from '../common/IconButton';
+'use client';
 
-export default function Header() {
+import React from 'react';
+import Link from 'next/link';
+import { useAppSelector } from '@/store';
+import { selectCartCount } from '@/store/cartSlice';
+
+interface HeaderProps {
+  onMenuToggle?: () => void;
+  activeNav?: string;
+}
+
+export default function Header({ onMenuToggle, activeNav = 'Shop' }: HeaderProps) {
+  const cartCount = useAppSelector(selectCartCount);
+
   return (
-    <header className={`${styleVars.surface} fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-md border-b border-outline-variant/10`}>
+    <header className="bg-background fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-md">
       <div className="flex items-center gap-md">
-        <IconButton
-          icon={<span className="material-symbols-outlined text-on-surface">menu</span>}
-          ariaLabel="Menu"
-        />
-        <h1 className={`${styleVars.fontH3} font-bold text-primary`}>Serene Shop</h1>
+        <button
+          onClick={onMenuToggle}
+          className="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 transition-colors p-2 rounded-full"
+        >
+          menu
+        </button>
+        <Link href="/" className="font-h3 text-h3 font-bold text-primary">
+          Serene Shop
+        </Link>
       </div>
 
       <nav className="hidden md:flex items-center gap-lg">
-        <a className="text-primary font-bold font-label-sm text-label-sm" href="/">
+        <Link
+          className={activeNav === 'Shop' ? 'text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-variant/50 transition-colors px-sm py-xs rounded'}
+          href="/"
+        >
           Shop
-        </a>
-        <a className="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="/products">
+        </Link>
+        <Link
+          className={activeNav === 'Categories' ? 'text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-variant/50 transition-colors px-sm py-xs rounded'}
+          href="/categories"
+        >
           Categories
-        </a>
-        <a className="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="/about">
-          About
-        </a>
+        </Link>
+        <Link
+          className={activeNav === 'Cart' ? 'text-primary font-bold flex flex-col items-center justify-center' : 'text-on-surface-variant hover:bg-surface-variant/50 transition-colors px-sm py-xs rounded'}
+          href="/cart"
+        >
+          Cart
+        </Link>
+        <Link
+          className={activeNav === 'Profile' ? 'text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-variant/50 transition-colors px-sm py-xs rounded'}
+          href="#"
+        >
+          Profile
+        </Link>
       </nav>
 
-      <div className="flex items-center gap-md">
-        <IconButton
-          icon={<span className="material-symbols-outlined text-on-surface">search</span>}
-          ariaLabel="Search"
-        />
-        <IconButton
-          icon={<span className="material-symbols-outlined text-on-surface">shopping_cart</span>}
-          ariaLabel="Cart"
-        />
+      <div className="flex items-center gap-sm">
+        <Link href="/products" className="material-symbols-outlined text-primary hover:bg-surface-variant/50 transition-colors p-2 rounded-full">
+          search
+        </Link>
+        <Link href="/cart" className="relative material-symbols-outlined text-primary hover:bg-surface-variant/50 transition-colors p-2 rounded-full" style={{ fontVariationSettings: cartCount > 0 ? "'FILL' 1" : "'FILL' 0" }}>
+          shopping_cart
+          {cartCount > 0 && (
+            <span className="absolute -top-1 -right-1 bg-primary text-on-primary text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full">
+              {cartCount}
+            </span>
+          )}
+        </Link>
       </div>
     </header>
   );

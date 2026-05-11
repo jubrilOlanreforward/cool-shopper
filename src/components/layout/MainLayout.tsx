@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
@@ -6,18 +8,31 @@ import NavigationDrawer from './NavigationDrawer';
 
 interface MainLayoutProps {
   children: React.ReactNode;
+  showFooter?: boolean;
+  activeNav?: string;
+  activeBottomTab?: string;
 }
 
-export default function MainLayout({ children }: MainLayoutProps) {
+export default function MainLayout({
+  children,
+  showFooter = true,
+  activeNav = 'Shop',
+  activeBottomTab = 'Shop',
+}: MainLayoutProps) {
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <Header />
-      <NavigationDrawer />
-      <main className="flex-1 pt-[100px] pb-[100px] md:pb-0 max-w-container-max mx-auto w-full px-gutter">
+    <>
+      <Header
+        onMenuToggle={() => setDrawerOpen(true)}
+        activeNav={activeNav}
+      />
+      <NavigationDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <main className="pt-[100px] pb-xl max-w-container-max mx-auto px-gutter">
         {children}
       </main>
-      <Footer />
-      <BottomNavBar />
-    </div>
+      {showFooter && <Footer />}
+      <BottomNavBar activeTab={activeBottomTab} />
+    </>
   );
 }

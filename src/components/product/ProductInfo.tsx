@@ -1,6 +1,4 @@
 import React from 'react';
-import { styleVars } from '../common/styleVars';
-import RatingStars from '../common/RatingStars';
 
 interface ProductInfoProps {
   category: string;
@@ -19,20 +17,34 @@ export default function ProductInfo({
   reviewCount,
   description,
 }: ProductInfoProps) {
+  const fullStars = Math.floor(rating);
+  const emptyStars = 5 - fullStars;
+
   return (
-    <div className="md:col-span-5 space-y-md">
+    <>
       <div className="space-y-xs">
         <p className="text-primary font-label-sm text-label-sm uppercase tracking-widest">{category}</p>
-        <h2 className={`${styleVars.fontH1} text-on-surface`}>{title}</h2>
-        <p className={`${styleVars.fontH3} font-bold text-on-surface`}>{price}</p>
+        <h2 className="font-h1 text-h1 text-on-surface">{title}</h2>
+        <p className="text-h3 font-h3 font-bold text-on-surface">{price}</p>
       </div>
 
-      <div className="flex items-center gap-xs">
-        <RatingStars rating={rating} />
+      <div className="flex items-center gap-xs text-tertiary">
+        {Array.from({ length: fullStars }).map((_, i) => (
+          <span key={`full-${i}`} className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+            star
+          </span>
+        ))}
+        {Array.from({ length: emptyStars }).map((_, i) => (
+          <span key={`empty-${i}`} className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>
+            star
+          </span>
+        ))}
         <span className="text-on-surface-variant text-body-md ml-base">({reviewCount} reviews)</span>
       </div>
 
-      <p className="text-on-surface-variant font-body-lg text-body-lg leading-relaxed">{description}</p>
-    </div>
+      <p className="text-on-surface-variant font-body-lg text-body-lg leading-relaxed">
+        {description}
+      </p>
+    </>
   );
 }
