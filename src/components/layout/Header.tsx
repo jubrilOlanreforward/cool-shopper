@@ -46,12 +46,6 @@ export default function Header({ onMenuToggle, activeNav = 'Shop' }: HeaderProps
         >
           Cart
         </Link>
-        <Link
-          className={activeNav === 'Profile' ? 'text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-variant/50 transition-colors px-sm py-xs rounded'}
-          href="#"
-        >
-          Profile
-        </Link>
       </nav>
 
       <div className="flex items-center gap-sm">
